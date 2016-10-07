@@ -33,6 +33,11 @@ public:
 	static void printArrMat(int len, Matrix** A);
 	
 	static Matrix* I(int dim);
+	
+	Matrix* operator+(Matrix* A);
+	Matrix* operator-(Matrix* A);
+	Matrix* operator*(double k);
+	Matrix* operator*(Matrix* A);
 	void print();
 private:
 	int rows, cols;

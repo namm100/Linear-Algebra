@@ -307,6 +307,21 @@ Matrix* Matrix::I(int dim) {
 	return toSend;
 }
 
+Matrix* Matrix::operator+(Matrix* A) {
+	return add(this, A);
+}
+
+Matrix* Matrix::operator-(Matrix* A) {
+	return add(this, multiply(-1,A));
+}
+
+Matrix* Matrix::operator*(double k) {
+	return multiply(k,this);
+}
+
+Matrix* Matrix::operator*(Matrix* A) {
+	return multiply(this, A);
+}
 
 Matrix::~Matrix() {
 	delete[] mat;

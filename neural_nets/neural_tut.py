@@ -45,6 +45,11 @@ class Neural_Network(object):
 		return dJdW1, dJdW2
 
 
+		
+	
+	def computeGradients(self, X, y):
+		dJdW1, dJdW2 = self.costFunctionPrime(X, y)
+		return np.concatenate((dJdW1.ravel(), dJdW2.ravel()))
 	def getParams(self):
 		params = np.concatenate((self.W1.ravel(), self.W2.ravel()))
 		return params
@@ -54,15 +59,10 @@ class Neural_Network(object):
 		W1_end = self.hiddenLayerSize * self.inputLayerSize
 		self.W1 = np.reshape(params[W1_start:W1_end], (self.inputLayerSize, self.hiddenLayerSize))
 		W2_end = W1_end + self.hiddenLayerSize * self.outputLayerSize
-		self.W2 = np.reshape(params[W1_end:W2_end], (self.hiddenLayerSize, self.outputLayerSize))	
-	
-	def computeGradients(self, X, y):
-		dJdW1, dJdW2 = self.costFunctionPrime(X, y)
-		return np.concatenate((dJdW1.ravel(), dJdW2.ravel()))
-
+		self.W2 = np.reshape(params[W1_end:W2_end], (self.hiddenLayerSize, self.outputLayerSize))
 def computeNumericalGradient(N, X, y):
 		paramsInitial = N.getParams()
-		numgrad = np.zeros(paramsInitial.shape
+		numgrad = np.zeros(paramsInitial.shape)
 		perturb = np.zeros(paramsInitial.shape)
 		e = 1e-4
 		
@@ -85,8 +85,8 @@ if __name__=="__main__":
 	X = np.array(([3,5], [5,1], [10,2]), dtype=float)
 	y = np.array(([75], [82], [93]), dtype=float)
 	
-	numgrad = computeNumericalGradient(NN, X, y)
+	#numgrad = computeNumericalGradient(NN, X, y)
 	grad = NN.computeGradients(X, y)
-	print numgrad
+	#print numgrad
 	print grad
 	
